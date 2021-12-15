@@ -14,14 +14,13 @@ turtle.resizemode("user")
 state_ob = State()
 
 data = pd.read_csv('state.csv')
-data_dict = data.to_dict()
+data_dict = {'state': [state.lower() for state in data['state'].tolist()], 'x': data['X'].tolist(), 'Y': data['Y'].tolist()}
 
 for _ in range(len(data['state'])):
     state_name = turtle.textinput("What's another state name?", "prompt")
-    if state_name.lower
-
-for index, row in data.iterrows():
-    state_ob.write_state(row['state'], row['X'], row['Y'])
-    #print(row['state'], row['X'], row['Y'])
+    
+    if state_name.lower() in data_dict['state']:
+        index = data_dict['state'].index(state_name.lower())
+        state_ob.write_state(state_name.title(), data_dict['x'][index], data_dict['Y'][index])
 
 turtle.mainloop()
